@@ -1,6 +1,6 @@
 import json
 #file name
-file_directory = 'E:\studying software\Python3.4.2\python_file\input.txt'
+file_directory = '.\input.txt'
 #open file
 f=open(file_directory)
 #temp(string) txt to string
