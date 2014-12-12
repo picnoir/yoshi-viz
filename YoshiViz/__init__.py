@@ -57,6 +57,11 @@ def Situatedness(avgDistance, avgCulturalDistance):
     else:
         return False
 
-#test
-#print (inputData())
-#print (StringToObj(txtToString()))
+#judge if is NoP, True if it is NoP
+def NetworkOfPractice(selfSimilarity):
+    if selfSimilarity >= SELF_SIMILARITY :
+        return True
+    else:
+        return False
+
+    
