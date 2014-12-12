@@ -7,7 +7,24 @@ def DecisionTreeAlgorithm(uniqueComments, avgSubscriptions, avgeUserCommits, avg
     #Situatedness
     if Situatedness(avgDistance, avgCulturalDistance):
         CommunityType.append('CoP')
-        return CommunityType
+         #Informality
+        if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
+            CommunityType.append('IN')
+            #Engagement
+            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
+                CommunityType.append('IC')
+                return CommunityType
+            #neither IC and NoP
+            else:
+                return CommunityType
+            
+        else:
+            CommunityType.append('FN')
+            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
+                CommunityType.append('IC')
+                return CommunityType
+            else:
+                return CommunityType
     else:
         #Informality
         if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
