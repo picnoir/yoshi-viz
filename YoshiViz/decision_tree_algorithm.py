@@ -7,50 +7,31 @@ def DecisionTreeAlgorithm(uniqueComments, avgSubscriptions, avgeUserCommits, avg
     #Situatedness
     if Situatedness(avgDistance, avgCulturalDistance):
         CommunityType.append('CoP')
-         #Informality
-        if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
-            CommunityType.append('IN')
-            #Engagement
-            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-                CommunityType.append('IC')
-                return CommunityType
-            #neither IC and NoP
-            else:
-                return CommunityType
-            
+    #Informality
+    if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
+        CommunityType.append('IN')
+        #Engagement
+        if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
+            CommunityType.append('IC')
+            return CommunityType
+        #judge if is NoP
+        elif NetworkOfPractice(selfSimilarity) and Situatedness(avgDistance, avgCulturalDistance) == False:
+            CommunityType.append('NoP')
+            return CommunityType
+        #neither IC and NoP
         else:
-            CommunityType.append('FN')
-            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-                CommunityType.append('IC')
-                return CommunityType
-            else:
-                return CommunityType
+            return CommunityType
+            
     else:
-        #Informality
-        if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
-            CommunityType.append('IN')
-            #Engagement
-            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-                CommunityType.append('IC')
-                return CommunityType
-            #judge if is NoP
-            elif NetworkOfPractice(selfSimilarity):
-                CommunityType.append('NoP')
-                return CommunityType
-            #neither IC and NoP
-            else:
-                return CommunityType
-            
+        CommunityType.append('FN')
+        if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
+            CommunityType.append('IC')
+            return CommunityType
+        elif NetworkOfPractice(selfSimilarity) and Situatedness(avgDistance, avgCulturalDistance) == False:
+            CommunityType.append('NoP')
+            return CommunityType
         else:
-            CommunityType.append('FN')
-            if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-                CommunityType.append('IC')
-                return CommunityType
-            elif NetworkOfPractice(selfSimilarity):
-                CommunityType.append('NoP')
-                return CommunityType
-            else:
-                return CommunityType
+            return CommunityType
 
 
 
