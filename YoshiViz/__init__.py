@@ -35,24 +35,34 @@ def StringToObj(temp):
     return data
 
 #judge if is high eneagement, return boolean value, True if engagement is high
-def Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-    if (uniqueComments == True and avgSubscriptions >= AVERAGE_SUBSCRIPTION and avgeUserCommits >= AVERAGE_USER_COMMITS
-        and avgUserCollaborationFiles >= AVERAGE_USER_COLLABORATION_FILES and avgeFileContributors >= AVERAGE_FILE_CONTRIBUTOR):
+def Engagement(
+        uniqueComments, avgSubscriptions, avgeUserCommits,
+        avgUserCollaborationFiles, avgeFileContributors):
+    if (uniqueComments and
+        avgSubscriptions >= AVERAGE_SUBSCRIPTION and
+        avgeUserCommits >= AVERAGE_USER_COMMITS and
+        avgUserCollaborationFiles >= AVERAGE_USER_COLLABORATION_FILES and
+        avgeFileContributors >= AVERAGE_FILE_CONTRIBUTOR):
         return True
     else:
         return False
 
 #judge if is informal or not, return boolean value, True if it is informal
-def Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
-    if (avgMilestonesPeriod <= AVERAGE_MILESTONES and hierarchyDegree <= HIERARCHICAL_DEGREE and hasWiki == True):
+def Informality(
+    avgMilestonesPeriod, hierarchyDegree, hasWiki):
+    if (avgMilestonesPeriod <= AVERAGE_MILESTONES and
+        hierarchyDegree <= HIERARCHICAL_DEGREE and
+        hasWiki):
         return True
     else:
         return False
 
 
 #judge if is situated, return boolean vaule, True if situatedness is nearby, Flase is for far alway remoteness 
-def Situatedness(avgDistance, avgCulturalDistance):
-    if (avgDistance <= GEOGRAPHICAL_DISTANCE and avgCulturalDistance <= CULTURAL_DISTANCE):
+def Situatedness(
+    avgDistance, avgCulturalDistance):
+    if (avgDistance <= GEOGRAPHICAL_DISTANCE and
+        avgCulturalDistance <= CULTURAL_DISTANCE):
         return True
     else:
         return False
