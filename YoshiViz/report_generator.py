@@ -3,11 +3,12 @@ import json
 from jinja2 import Template
 
 
-def generate_pdf_report(yoshi_output_file, project_name):
+def generate_pdf_report(yoshi_output_file, project_name, community_type):
     """
     Generates a PDF report of a given output of Yoshi.
     :param yoshi_output_file: Path to the Yoshi output file.
     :param project_name: Name of the project.
+    :param community_type
     :return:
     """
     yoshi_file = open(yoshi_output_file, "r")
@@ -19,7 +20,8 @@ def generate_pdf_report(yoshi_output_file, project_name):
     template = Template(template_file.read())
     template_file.close()
     output = template.render(DataQuality=json_data['DataQuality'][community_index],
-                             DataCommunity=json_data['DataCommunity'][community_index])
+                             DataCommunity=json_data['DataCommunity'][community_index],
+                             community_type=community_type)
     output_file = open(os.path.join(os.path.abspath('.'), 'YoshiViz', 'output',
                                     project_name + '_report.html'), 'w')
     output_file.write(output)
