@@ -2,7 +2,12 @@ import json
 from __init__ import *
 
 
-def DecisionTreeAlgorithm(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors, avgMilestonesPeriod, hierarchyDegree, hasWiki, avgDistance, avgCulturalDistance, selfSimilarity):
+def DecisionTreeAlgorithm(
+    uniqueComments, avgSubscriptions, avgeUserCommits,
+    avgUserCollaborationFiles, avgeFileContributors,
+    avgMilestonesPeriod, hierarchyDegree, hasWiki,
+    avgDistance, avgCulturalDistance, selfSimilarity):
+
     CommunityType = []
     #Situatedness
     if Situatedness(avgDistance, avgCulturalDistance):
@@ -15,7 +20,8 @@ def DecisionTreeAlgorithm(uniqueComments, avgSubscriptions, avgeUserCommits, avg
             CommunityType.append('IC')
             return CommunityType
         #judge if is NoP
-        elif NetworkOfPractice(selfSimilarity) and Situatedness(avgDistance, avgCulturalDistance) == False:
+        elif NetworkOfPractice(selfSimilarity) and \
+            not Situatedness(avgDistance, avgCulturalDistance):
             CommunityType.append('NoP')
             return CommunityType
         #neither IC and NoP
@@ -27,7 +33,8 @@ def DecisionTreeAlgorithm(uniqueComments, avgSubscriptions, avgeUserCommits, avg
         if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
             CommunityType.append('IC')
             return CommunityType
-        elif NetworkOfPractice(selfSimilarity) and Situatedness(avgDistance, avgCulturalDistance) == False:
+        elif NetworkOfPractice(selfSimilarity) and \
+            not Situatedness(avgDistance, avgCulturalDistance):
             CommunityType.append('NoP')
             return CommunityType
         else:
@@ -43,11 +50,54 @@ temp = TxtToString(fileDirectory)
 #string to python object
 data = StringToObj(temp)
 #test decision tree
-print('RepositoryOwner RepositoryName type')
-for i in range(len(data['DataCommunity'])):
-    tempCommunityType = DecisionTreeAlgorithm(data['DataCommunity'][i]['uniqueCommenterExists'],data['DataQuality'][i]['avgSubscriptions'],data['DataQuality'][i]['avgeUserCommits'],data['DataQuality'][i]['avgUserCollaborationFiles'],data['DataQuality'][i]['avgeFileContributors'], data['DataCommunity'][i]['avgMilestonesPeriod'],data['DataCommunity'][i]['hierarchyDegree'],data['DataQuality'][i]['hasWiki'], data['DataCommunity'][i]['avgDistance'], data['DataCommunity'][i]['avgCulturalDistance'], data['DataCommunity'][i]['selfSimilarity'])
-    print(data['DataCommunity'][i]['RepoOwner'],data['DataCommunity'][i]['RepoName'],tempCommunityType)
+repositoryName = 'bootstrap'
 
+
+#test specific repository and return only one corresponding result
+for i in range(len(data['DataCommunity'])):
+    if data['DataCommunity'][i]['RepoName'] ==repositoryName:
+        tempCommunityType = DecisionTreeAlgorithm(
+                    data['DataCommunity'][i]['uniqueCommenterExists'],
+                    data['DataQuality'][i]['avgSubscriptions'],
+                    data['DataQuality'][i]['avgeUserCommits'],
+                    data['DataQuality'][i]['avgUserCollaborationFiles'],
+                    data['DataQuality'][i]['avgeFileContributors'],
+                    data['DataCommunity'][i]['avgMilestonesPeriod'],
+                    data['DataCommunity'][i]['hierarchyDegree'],
+                    data['DataQuality'][i]['hasWiki'],
+                    data['DataCommunity'][i]['avgDistance'],
+                    data['DataCommunity'][i]['avgCulturalDistance'],
+                    data['DataCommunity'][i]['selfSimilarity'])
+        print('RepositoryOwner RepositoryName type')
+        print(data['DataCommunity'][i]['RepoOwner'],data['DataCommunity'][i]['RepoName'],tempCommunityType)
+        break
+    if i == len(data['DataCommunity'])-1:
+        print('no such repository name')
+
+
+
+#test for all repository for one time
+'''
+for i in range(len(data['DataCommunity'])):
+
+        tempCommunityType = DecisionTreeAlgorithm(
+                    data['DataCommunity'][i]['uniqueCommenterExists'],
+                    data['DataQuality'][i]['avgSubscriptions'],
+                    data['DataQuality'][i]['avgeUserCommits'],
+                    data['DataQuality'][i]['avgUserCollaborationFiles'],
+                    data['DataQuality'][i]['avgeFileContributors'],
+                    data['DataCommunity'][i]['avgMilestonesPeriod'],
+                    data['DataCommunity'][i]['hierarchyDegree'],
+                    data['DataQuality'][i]['hasWiki'],
+                    data['DataCommunity'][i]['avgDistance'],
+                    data['DataCommunity'][i]['avgCulturalDistance'],
+                    data['DataCommunity'][i]['selfSimilarity'])
+        print(data['DataCommunity'][i]['RepoOwner'],data['DataCommunity'][i]['RepoName'],tempCommunityType)
+'''
+
+
+
+        
 #test
 #print related object
 #print (data['DataQuality'][0]['RepoOwner'],data['DataQuality'][0]['monthlyEventsStdDev'])
