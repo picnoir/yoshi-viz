@@ -153,7 +153,7 @@ def decision_tree_algorithm(
     :param avg_distance: Average physical distance between the members.
     :param avg_cultural_distance: Average cultural distance between the members.
     :param self_similarity: Self similarity.
-    :return: List containing the various types of community.
+    :return: String of the community type.
     """
 
     community_type_list = []
@@ -167,28 +167,28 @@ def decision_tree_algorithm(
         if engagement(unique_comments, avg_subscriptions, avg_user_commits,
                       avg_user_collaboration_files, avg_file_contributors):
             community_type_list.append('Informal Community')
-            return community_type_list
+            return ', '.join(community_type_list)
         #judge if is NoP
         elif network_of_practice(self_similarity) and \
                 not situatedness(avg_distance, avg_cultural_distance):
             community_type_list.append('Network of Practice')
-            return community_type_list
+            return ', '.join(community_type_list)
         #neither IC and NoP
         else:
-            return community_type_list
+            return ', '.join(community_type_list)
             
     else:
         community_type_list.append('Formal Network')
         if engagement(unique_comments, avg_subscriptions, avg_user_commits,
                       avg_user_collaboration_files, avg_file_contributors):
             community_type_list.append('Informal Community')
-            return community_type_list
+            return ' '.join(community_type_list)
         elif network_of_practice(self_similarity) and \
             not situatedness(avg_distance, avg_cultural_distance):
             community_type_list.append('Network of Practice')
-            return community_type_list
+            return ' '.join(community_type_list)
         else:
-            return community_type_list
+            return ' '.join(community_type_list)
 
 
 '''
