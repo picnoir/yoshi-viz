@@ -1,5 +1,10 @@
-import json
-
+'''
+this file is the preparation of decision tree
+F1:(Engagement)judge if is high eneagement, return boolean value, True if engagement is high
+F2:(Informality)judge if is informal or not, return boolean value, True if it is informal
+F3:(Situatedness)judge if is situated, return boolean vaule, True if situatedness is nearby, Flase is for far alway remoteness 
+F4:(NetworkOfPractice)judge if is NoP, True if it is NoP
+'''
 #global constant variable for thresholds
 #geographical distance
 GEOGRAPHICAL_DISTANCE = 4000
@@ -19,20 +24,6 @@ AVERAGE_USER_COMMITS = 14.22
 AVERAGE_USER_COLLABORATION_FILES = 0.200
 #average file contributor
 AVERAGE_FILE_CONTRIBUTOR = 1.220
-
-#read the data in txt and write it into string
-def TxtToString(fileDirectory):
-
-    #open file
-    f=open(fileDirectory)
-    #temp(string) txt to string
-    temp = f.read()   
-    return temp
-
-#transfer string into python object (json form)
-def StringToObj(temp):
-    data = json.loads(temp)
-    return data
 
 #judge if is high eneagement, return boolean value, True if engagement is high
 def Engagement(
