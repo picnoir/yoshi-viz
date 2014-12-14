@@ -1,7 +1,7 @@
 import json
-from __init__ import *
+from thresholds_functions import *
 
-
+#already defined algorithm 
 def DecisionTreeAlgorithm(
     uniqueComments, avgSubscriptions, avgeUserCommits,
     avgUserCollaborationFiles, avgeFileContributors,
@@ -44,6 +44,8 @@ def DecisionTreeAlgorithm(
 
 
 #code below will done in report_generator
+
+#file director        
 fileDirectory = r'.\input.txt'
 #read from txt
 temp = TxtToString(fileDirectory)
