@@ -41,11 +41,12 @@ def _find_community_index(json_data, community_name):
     index = 0
     found = False
     while not found:
-        if json_data['DataQuality'][index]['RepoName'] == community_name:
-            DataQuality = json_data['DataQuality'][index]
-            DataCommunity = json_data['DataCommunity'][index]
-            return index
-        else:
-            index += 1
-    raise Exception(community_name + " cannot be found in the specified file.")
+        try:
+            if json_data['DataQuality'][index]['RepoName'] == community_name:
+                return index
+            else:
+                index += 1
+        except:
+            raise Exception("The community " +
+                            community_name + " cannot be found in the specified file.")
 
