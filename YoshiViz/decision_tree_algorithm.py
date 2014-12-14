@@ -1,5 +1,10 @@
+'''
+this file is the algorithm part
+F1:(DecisionTreeAlgorithm)input the metrics to define(return) the community type
+'''
 import json
 from thresholds_functions import *
+from dataProcessing import *
 
 #already defined algorithm 
 def DecisionTreeAlgorithm(
@@ -52,9 +57,7 @@ temp = TxtToString(fileDirectory)
 #string to python object
 data = StringToObj(temp)
 #test decision tree
-repositoryName = 'bootstrap'
-
-
+repositoryName = name = input("Please input repository name:\n")
 #test specific repository and return only one corresponding result
 for i in range(len(data['DataCommunity'])):
     if data['DataCommunity'][i]['RepoName'] ==repositoryName:
@@ -113,16 +116,26 @@ for i in range(len(data['DataCommunity'])):
     print (highEngagement)
 '''
 
-#test informality(true is informal)
+#test informality(true is informal) of all
 '''
 for i in range(len(data['DataCommunity'])):
     informal = Informality(data['DataCommunity'][i]['avgMilestonesPeriod'],data['DataCommunity'][i]['hierarchyDegree'],data['DataQuality'][i]['hasWiki'])
     print (informal)
 '''
 
-#test situated distance
+#test situated distance (true is near situatedness) of all
 '''
 for i in range(len(data['DataCommunity'])):
     situated = Situatedness(data['DataCommunity'][i]['avgDistance'], data['DataCommunity'][i]['avgCulturalDistance'])
     print (situated)
 '''
+#test self similarity (trur is high self-similartity) of all
+'''
+for i in range(len(data['DataCommunity'])):
+    selfSimi = NetworkOfPractice(data['DataCommunity'][i]['selfSimilarity'])
+    print (selfSimi)
+
+'''
+
+    
+
