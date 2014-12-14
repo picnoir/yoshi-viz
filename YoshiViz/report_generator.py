@@ -9,7 +9,6 @@ def generate_pdf_report(yoshi_output_file, project_name, community_type):
     :param yoshi_output_file: Path to the Yoshi output file.
     :param project_name: Name of the project.
     :param community_type
-    :return:
     """
     yoshi_file = open(yoshi_output_file, "r")
     json_data = json.load(yoshi_file)

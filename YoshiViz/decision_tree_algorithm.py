@@ -1,7 +1,7 @@
-'''
+"""
 this file is the algorithm part
 F1:(DecisionTreeAlgorithm)input the metrics to define(return) the community type
-'''
+"""
 import json
 #from thresholds_functions import Engagement,Informality,Situatedness,NetworkOfPractice
 
@@ -32,42 +32,69 @@ AVERAGE_USER_COLLABORATION_FILES = 0.200
 #average file contributor
 AVERAGE_FILE_CONTRIBUTOR = 1.220
 
-#judge if is high eneagement, return boolean value, True if engagement is high
-def Engagement(
-        uniqueComments, avgSubscriptions, avgeUserCommits,
-        avgUserCollaborationFiles, avgeFileContributors):
-    if (uniqueComments and
-        avgSubscriptions >= AVERAGE_SUBSCRIPTION and
-        avgeUserCommits >= AVERAGE_USER_COMMITS and
-        avgUserCollaborationFiles >= AVERAGE_USER_COLLABORATION_FILES and
-        avgeFileContributors >= AVERAGE_FILE_CONTRIBUTOR):
+
+def engagement(
+        unique_comments, avg_subscriptions, avg_user_commits,
+        avg_user_collaboration_files, avg_file_contributors):
+    """
+    Define the engagement type of a software community.
+    :param unique_comments: Only one person is using comment? (boolean)
+    :param avg_subscriptions: Average subscriptions number.
+    :param avg_user_commits: Average number of commits per user.
+    :param avg_user_collaboration_files: Average number of file
+           collaboratively created by users.
+    :param avg_file_contributors:
+    :return: True if high engagement, false otherwise.
+    """
+    if (unique_comments and
+        avg_subscriptions >= AVERAGE_SUBSCRIPTION and
+        avg_user_commits >= AVERAGE_USER_COMMITS and
+        avg_user_collaboration_files >= AVERAGE_USER_COLLABORATION_FILES and
+            avg_file_contributors >= AVERAGE_FILE_CONTRIBUTOR):
         return True
     else:
         return False
 
-#judge if is informal or not, return boolean value, True if it is informal
-def Informality(
-    avgMilestonesPeriod, hierarchyDegree, hasWiki):
-    if (avgMilestonesPeriod <= AVERAGE_MILESTONES and
-        hierarchyDegree <= HIERARCHICAL_DEGREE and
-        hasWiki):
+
+def informality(avg_milestones_period, hierarchy_degree, has_wiki):
+    """
+    Judge if the community is informal or not.
+    :param avg_milestones_period: Average time spent for each milestone.
+    :param hierarchy_degree: Hierarchy degree.
+    :param has_wiki: True if the community has a wiki, false otherwise.
+    :return: True if the community is informal, false otherwise.
+    """
+    if (avg_milestones_period <= AVERAGE_MILESTONES and
+        hierarchy_degree <= HIERARCHICAL_DEGREE and
+            has_wiki):
         return True
     else:
         return False
 
 
-#judge if is situated, return boolean vaule, True if situatedness is nearby, Flase is for far alway remoteness 
-def Situatedness(
-    avgDistance, avgCulturalDistance):
-    if (avgDistance <= GEOGRAPHICAL_DISTANCE and
-        avgCulturalDistance <= CULTURAL_DISTANCE):
+def situatedness(avg_distance, avg_cultural_distance):
+    """
+    Judge if the community is physically situated,
+    :param avg_distance: Average physical distance of the members of this
+    community.
+    :param avg_cultural_distance: Average cultural distance of the members of this
+    community.
+    :return: True if the community is physically situated, False otherwise.
+    """
+    if (avg_distance <= GEOGRAPHICAL_DISTANCE and
+            avg_cultural_distance <= CULTURAL_DISTANCE):
         return True
     else:
         return False
 
-#judge if is NoP, True if it is NoP
-def NetworkOfPractice(selfSimilarity):
-    if selfSimilarity >= SELF_SIMILARITY :
+
+def network_of_practice(self_similarity):
+    """
+    Judge if this community type is network of practice.
+    :param self_similarity: Self similarity of the community.
+    :return: True if the community's type is network of practice, false otherwise.
+    """
+    if self_similarity >= SELF_SIMILARITY:
         return True
     else:
         return False
@@ -75,70 +102,93 @@ def NetworkOfPractice(selfSimilarity):
 above is the thresholds functions
 '''
 
-#one repoitory name to one result
-def CommunityType(fileDirectory,repositoryName):
+
+def community_type(file_directory, repository_name):
+    """
+    Returns the various properties of one specific community.
+    :param file_directory: File directory.
+    :param repository_name: Name of the wanted repository.
+    :return: Repository properties dict.
+    """
     #open file
-    f=open(fileDirectory)
+    file = open(file_directory)
     #temp(string) txt to string
-    temp = f.read()  
+    temp = file.read()
     data = json.loads(temp)
     for i in range(len(data['DataCommunity'])):
-        if data['DataCommunity'][i]['RepoName'] ==repositoryName:
-            tempCommunityType = DecisionTreeAlgorithm(
-                    data['DataCommunity'][i]['uniqueCommenterExists'],
-                    data['DataQuality'][i]['avgSubscriptions'],
-                    data['DataQuality'][i]['avgeUserCommits'],
-                    data['DataQuality'][i]['avgUserCollaborationFiles'],
-                    data['DataQuality'][i]['avgeFileContributors'],
-                    data['DataCommunity'][i]['avgMilestonesPeriod'],
-                    data['DataCommunity'][i]['hierarchyDegree'],
-                    data['DataQuality'][i]['hasWiki'],
-                    data['DataCommunity'][i]['avgDistance'],
-                    data['DataCommunity'][i]['avgCulturalDistance'],
-                    data['DataCommunity'][i]['selfSimilarity'])
-            return tempCommunityType
-            break
+        if data['DataCommunity'][i]['RepoName'] == repository_name:
+            temp_community_type = decision_tree_algorithm(
+                data['DataCommunity'][i]['uniqueCommenterExists'],
+                data['DataQuality'][i]['avgSubscriptions'],
+                data['DataQuality'][i]['avgeUserCommits'],
+                data['DataQuality'][i]['avgUserCollaborationFiles'],
+                data['DataQuality'][i]['avgeFileContributors'],
+                data['DataCommunity'][i]['avgMilestonesPeriod'],
+                data['DataCommunity'][i]['hierarchyDegree'],
+                data['DataQuality'][i]['hasWiki'],
+                data['DataCommunity'][i]['avgDistance'],
+                data['DataCommunity'][i]['avgCulturalDistance'],
+                data['DataCommunity'][i]['selfSimilarity'])
+            return temp_community_type
         if i == len(data['DataCommunity'])-1:
             return 'no such repository name'
 
-#already defined algorithm 
-def DecisionTreeAlgorithm(
-    uniqueComments, avgSubscriptions, avgeUserCommits,
-    avgUserCollaborationFiles, avgeFileContributors,
-    avgMilestonesPeriod, hierarchyDegree, hasWiki,
-    avgDistance, avgCulturalDistance, selfSimilarity):
 
-    CommunityType = []
+def decision_tree_algorithm(
+    unique_comments, avg_subscriptions, avg_user_commits,
+    avg_user_collaboration_files, avg_file_contributors,
+    avg_milestones_period, hierarchy_degree, has_wiki,
+        avg_distance, avg_cultural_distance, self_similarity):
+    """
+    Using several community's properties, this algorithm
+    defines the type of the community observed.
+    :param unique_comments: Number of unique comments.
+    :param avg_subscriptions: Average number of subscriptions.
+    :param avg_user_commits: Average number of user commits.
+    :param avg_user_collaboration_files: Average number of collaborators per file.
+    :param avg_file_contributors: Average file owned by contributors.
+    :param avg_milestones_period: Average period used to complete a milestone.
+    :param hierarchy_degree: Hierarchy degree.
+    :param has_wiki: True if the community has a wiki.
+    :param avg_distance: Average physical distance between the members.
+    :param avg_cultural_distance: Average cultural distance between the members.
+    :param self_similarity: Self similarity.
+    :return: List containing the various types of community.
+    """
+
+    community_type_list = []
     #Situatedness
-    if Situatedness(avgDistance, avgCulturalDistance):
-        CommunityType.append('Community of Proctice')
+    if situatedness(avg_distance, avg_cultural_distance):
+        community_type_list.append('Community of Practice')
     #Informality
-    if Informality(avgMilestonesPeriod, hierarchyDegree, hasWiki):
-        CommunityType.append('Informal Network')
+    if informality(avg_milestones_period, hierarchy_degree, has_wiki):
+        community_type_list.append('Informal Network')
         #Engagement
-        if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-            CommunityType.append('Informal Community')
-            return CommunityType
+        if engagement(unique_comments, avg_subscriptions, avg_user_commits,
+                      avg_user_collaboration_files, avg_file_contributors):
+            community_type_list.append('Informal Community')
+            return community_type_list
         #judge if is NoP
-        elif NetworkOfPractice(selfSimilarity) and \
-            not Situatedness(avgDistance, avgCulturalDistance):
-            CommunityType.append('Network of Practice')
-            return CommunityType
+        elif network_of_practice(self_similarity) and \
+                not situatedness(avg_distance, avg_cultural_distance):
+            community_type_list.append('Network of Practice')
+            return community_type_list
         #neither IC and NoP
         else:
-            return CommunityType
+            return community_type_list
             
     else:
-        CommunityType.append('Formal Network')
-        if Engagement(uniqueComments, avgSubscriptions, avgeUserCommits, avgUserCollaborationFiles, avgeFileContributors):
-            CommunityType.append('Informal Community')
-            return CommunityType
-        elif NetworkOfPractice(selfSimilarity) and \
-            not Situatedness(avgDistance, avgCulturalDistance):
-            CommunityType.append('Network of Practice')
-            return CommunityType
+        community_type_list.append('Formal Network')
+        if engagement(unique_comments, avg_subscriptions, avg_user_commits,
+                      avg_user_collaboration_files, avg_file_contributors):
+            community_type_list.append('Informal Community')
+            return community_type_list
+        elif network_of_practice(self_similarity) and \
+            not situatedness(avg_distance, avg_cultural_distance):
+            community_type_list.append('Network of Practice')
+            return community_type_list
         else:
-            return CommunityType
+            return community_type_list
 
 
 '''
