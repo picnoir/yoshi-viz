@@ -6,8 +6,9 @@ This software requires python >= 3.3. The software will generate a report file i
 
 ##Dependancies
 
-Run pip to install the dependancies:
+Run pip to install the dependancies(Jinja2):
 
 	% python3 setup.py install
+
 
 
