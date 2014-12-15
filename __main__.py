@@ -9,6 +9,8 @@ if __name__ == '__main__':
     repositoryName = input("Please input repository name:\n")
     tempCommunityType = decision_tree_algorithm.\
         community_type(fileDirectory,repositoryName)
+    """
     report_generator.\
-        generate_pdf_report(fileDirectory, repositoryName, tempCommunityType)
+            generate_pdf_report(fileDirectory, repositoryName, tempCommunityType)
+    """
     print('the type of', repositoryName, 'is', tempCommunityType, '\n"check .\YoshiViz\output"')

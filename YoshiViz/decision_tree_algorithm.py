@@ -1,17 +1,21 @@
+
 """
 this file is the algorithm part
 F1:(DecisionTreeAlgorithm)input the metrics to define(return) the community type
 """
 import json
+from YoshiViz import *
+
+
 #from thresholds_functions import Engagement,Informality,Situatedness,NetworkOfPractice
 
-'''
+"""
 this file is the preparation of decision tree
 F1:(Engagement)judge if is high eneagement, return boolean value, True if engagement is high
 F2:(Informality)judge if is informal or not, return boolean value, True if it is informal
 F3:(Situatedness)judge if is situated, return boolean vaule, True if situatedness is nearby, Flase is for far alway remoteness 
 F4:(NetworkOfPractice)judge if is NoP, True if it is NoP
-'''
+"""
 #global constant variable for thresholds
 #geographical distance
 GEOGRAPHICAL_DISTANCE = 4000
@@ -129,9 +133,11 @@ def community_type(file_directory, repository_name):
                 data['DataCommunity'][i]['avgDistance'],
                 data['DataCommunity'][i]['avgCulturalDistance'],
                 data['DataCommunity'][i]['selfSimilarity'])
+            report_generator.generate_pdf_report(file_directory, repository_name, temp_community_type)
             return temp_community_type
         if i == len(data['DataCommunity'])-1:
-            return 'no such repository name'
+            repository_name = input("Please re-input repository name:\n")
+            return community_type(file_directory, repository_name)
 
 
 def decision_tree_algorithm(
