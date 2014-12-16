@@ -188,13 +188,13 @@ def decision_tree_algorithm(
         if engagement(unique_comments, avg_subscriptions, avg_user_commits,
                       avg_user_collaboration_files, avg_file_contributors):
             community_type_list.append('Informal Community')
-            return ' '.join(community_type_list)
+            return ', '.join(community_type_list)
         elif network_of_practice(self_similarity) and \
             not situatedness(avg_distance, avg_cultural_distance):
             community_type_list.append('Network of Practice')
-            return ' '.join(community_type_list)
+            return ', '.join(community_type_list)
         else:
-            return ' '.join(community_type_list)
+            return ', '.join(community_type_list)
 
 
 '''
