@@ -18,9 +18,11 @@ def generate_pdf_report(yoshi_output_file, project_name, community_type):
                                       'YoshiViz', 'output', 'template.jinja'), 'r')
     template = Template(template_file.read())
     template_file.close()
+    img_link = _find_img_link(community_type)
     output = template.render(DataQuality=json_data['DataQuality'][community_index],
                              DataCommunity=json_data['DataCommunity'][community_index],
-                             community_type=community_type)
+                             community_type=community_type,
+                             img_links=img_link)
     output_file = open(os.path.join(os.path.abspath('.'), 'YoshiViz', 'output',
                                     project_name + '_report.html'), 'w')
     output_file.write(output)
@@ -50,3 +52,25 @@ def _find_community_index(json_data, community_name):
             raise Exception("The community " +
                             community_name + " cannot be found in the specified file.")
 
+
+def _find_img_link(community_type):
+    """
+    DANGER
+    Return the img link of a community type.
+    :param community_type: String containing the community type.
+    :return: Community type subtree image link.
+    """
+
+    community_list = community_type.split(', ')
+    link_list = []
+    if 'Community of Practice' in community_list:
+        link_list.append('Cop.jpg')
+    if 'Informal Network' in community_list:
+        link_list.append('Informal_Network.jpg')
+    if 'Informal Community' in community_list:
+        link_list.append('Informal_community.jpg')
+    if 'Network of Practice' in community_list:
+        link_list.append('Nop.jpg')
+    if 'Formal Network' in community_list:
+        link_list.append('Formal.jpg')
+    return link_list
