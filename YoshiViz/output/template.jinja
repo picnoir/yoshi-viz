@@ -46,11 +46,11 @@
     </nav>
 
 
-    </header>
-    <!-- Page Content -->
-    <div class="container">
-	<div class="row">
+
+
+   <div class="row">
             <div class="col-lg-12">
+            <br><br>
                 <h1>{{DataQuality.RepoName}}</h1>
                 <p>
                 This community is a {{community_type}}.
@@ -58,10 +58,10 @@
                  <p>
                  This community type has been found using the following properties.
                 </p>
-                
-                <p> 
+
+                <p>
                 <h3>Quality related attributes:</h3>
-                
+
                 <ul>
                 {% if DataQuality.hasWiki %}
                     <li>This community has a wiki page.</li>
@@ -80,10 +80,10 @@
 
                 </ul>
                 </p>
-                
-                <p> 
+
+                <p>
                 <h3>Community related attributes:</h3>
-                
+
                 <ul>
                     <li>Average period for a milestone accomplishment: {{DataCommunity.avgMilestonesPeriod}}</li>
                     <li>Hierarchy degree: {{DataCommunity.hierarchyDegree}}</li>
@@ -102,6 +102,16 @@
                 </p>
             </div>
         </div>
+
+        <hr>
+
+
+
+    </div>
+
+    </header>
+    <!-- Page Content -->
+    <div class="container">
         <div class="row, images">
             <div class="col-lg-12">
                 <p><h1>Decision Tree</h1></p>
@@ -123,21 +133,17 @@
         {% endfor %}
 
 
-        
-
-        <hr>
-
-        <!-- Footer -->
+   <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Made by the doomed team.</p>
+                    <p>Made by Yoshi team.</p>
                 </div>
             </div>
             <!-- /.row -->
         </footer>
+        </div>
 
-    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
