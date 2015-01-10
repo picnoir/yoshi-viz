@@ -69,16 +69,22 @@ class Gui(QtGui.QMainWindow):
     def ok_file_button_clicked(self):
         try:
             temp_community_type = decision_tree_algorithm.\
-                community_type(self.file_path.text(), self.repositoryName)
+                community_type(self.file_path.text(), self.repositoryName.text())
             file_directory = os.path.join(os.path.abspath('.'), 'YoshiViz', 'input.txt')
             report_generator.\
             generate_pdf_report(file_directory, self.repositoryName.text(), temp_community_type)
             dialog = QtGui.QMessageBox(self)
-            dialog.setText("The type of " + self.repositoryName() + " is " + temp_community_type +
+            dialog.setText("The type of " + self.repositoryName.text() + " is " + temp_community_type +
                 ". Check ./yoshiviz/output for more informations.")
+            dialog.exec()
         except:
             error = QtGui.QMessageBox(self)
             error.setText("Unable to find community " + self.repositoryName.text() + " in " +
-                                self.file_path.text() + " file.")
+                                 self.file_path.text() + " file.")
             error.setIcon(3)
             error.show()
+
+
+
+
+
