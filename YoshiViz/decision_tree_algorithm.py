@@ -133,11 +133,9 @@ def community_type(file_directory, repository_name):
                 data['DataCommunity'][i]['avgDistance'],
                 data['DataCommunity'][i]['avgCulturalDistance'],
                 data['DataCommunity'][i]['selfSimilarity'])
-            report_generator.generate_pdf_report(file_directory, repository_name, temp_community_type)
             return temp_community_type
         if i == len(data['DataCommunity'])-1:
-            repository_name = input("Please re-input repository name:\n")
-            return community_type(file_directory, repository_name)
+            raise Exception("Community not found")
 
 
 def decision_tree_algorithm(

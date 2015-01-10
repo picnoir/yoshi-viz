@@ -3,6 +3,7 @@ from distutils.core import setup
 requirements = [
     "jinja2",
     "pip",
+    "PyQt4"
 ]
 
 setup(
