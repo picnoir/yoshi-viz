@@ -18,7 +18,7 @@ class Gui(QtGui.QMainWindow):
         file_menu.addAction(exit_action)
         self._central_widget_layout()
         self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Yoshi Viz')
+        self.setWindowTitle('Yoshi Vis')
         self.show()
         sys.exit(app.exec_())
 
