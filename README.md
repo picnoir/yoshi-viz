@@ -10,5 +10,6 @@ Run pip to install the dependencies (Jinja2 and PyQt4):
 
 	% python3 setup.py install
 
+[PyQT4 for Win/Mac/Unix](http://www.riverbankcomputing.com/software/pyqt/download)
 
 
