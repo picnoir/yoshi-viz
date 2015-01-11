@@ -14,15 +14,15 @@ Run pip to install the dependencies (Jinja2 and PyQt4):
 [PyQT4 for Win/Mac/Unix](http://www.riverbankcomputing.com/software/pyqt/download)
 
 ##Usage
-Run __main__.py
+###Run __main__.py
 
-First click browse and choose the 'input.txt' file. *This is the formatted data.out file from [Yoshi](https://github.com/maelstromdat/YOSHI)*
+###First click browse and choose the 'input.txt' file. *This is the formatted data.out file from [Yoshi](https://github.com/maelstromdat/YOSHI)*
 ![Yoshi Vis](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%201.png "Browse the 'input.txt' file")
 
-Type the repository name (e.g. android):
+###Type the repository name (e.g. android):
 ![Yoshi Vis2](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%202.png "Type the community")
 
-Go to "YoshiViz/outpu" and find there detailed information
+###Go to "YoshiViz/outpu" and find there detailed information
 ![Yoshi Vis3](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png "Browse for more details")
 
-![Yoshi Vis4](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png)
+![Yoshi Vis4](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%204.png)
