@@ -16,6 +16,6 @@ Run pip to install the dependencies (Jinja2 and PyQt4):
 ##Usage
 Run __main__.py
 First click browse and choose the 'input.txt' file. *This is the formatted data.out file from ['Yoshi'](https://github.com/maelstromdat/YOSHI)*
-![Yoshi Vis]("/YoshiViz/Documentation/Yoshi Vis 1.jpg" "Browse the 'input.txt' file")
+![Yoshi Vis](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%201.png "Browse the 'input.txt' file")
 
 
