@@ -20,9 +20,9 @@ First click browse and choose the 'input.txt' file. *This is the formatted data.
 ![Yoshi Vis](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%201.png "Browse the 'input.txt' file")
 
 Type the repository name (e.g. android):
-[!Yoshi Vis2](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%202.png "Type the community")
+![Yoshi Vis2](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%202.png "Type the community")
 
 Go to "YoshiViz/outpu" and find there detailed information
-[!Yoshi Vis3](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png "Browse for more details")
+![Yoshi Vis3](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png "Browse for more details")
 
-[!Yoshi Vis4](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png)
+![Yoshi Vis4](https://raw.githubusercontent.com/NinjaTrappeur/yoshi-viz/master/YoshiViz/Documentation/Yoshi%20Vis%203.png)
