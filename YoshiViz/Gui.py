@@ -1,5 +1,5 @@
 from YoshiViz import report_generator, decision_tree_algorithm
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 import sys
 import os
 
@@ -16,13 +16,36 @@ class Gui(QtGui.QMainWindow):
         menu_bar = self.menuBar()
         file_menu = menu_bar.addMenu('&File')
         file_menu.addAction(exit_action)
-        self._central_widget_layout()
+        self._central_widget_layout_main()
         self.setGeometry(300, 300, 300, 200)
         self.setWindowTitle('Yoshi Vis')
         self.show()
         sys.exit(app.exec_())
 
-    def _central_widget_layout(self):
+    def _central_widget_layout_results(self, name, result):
+        central_widget = QtGui.QWidget(self)
+        grid = QtGui.QGridLayout()
+        central_widget.setLayout(grid)
+
+        self.name = name
+        self.result = result
+        title = QtGui.QLabel(name + " community is: " + result)
+        title.setAlignment(QtCore.Qt.AlignCenter)
+        font = QtGui.QFont("Arial", 15, QtGui.QFont.Bold)
+        title.setFont(font)
+        grid.addWidget(title, 0, 0)
+        print_report_button = QtGui.QPushButton("Generate Report")
+        grid.addWidget(print_report_button, 1, 0)
+        print_report_button.clicked.connect(self.report_button_clicked)
+        back_button = QtGui.QPushButton("Back to main screen")
+        grid.addWidget(back_button, 2, 0)
+        back_button.clicked.connect(self.back_button_clicked)
+
+
+        self.setCentralWidget(central_widget)
+
+
+    def _central_widget_layout_main(self):
         central_widget = QtGui.QWidget(self)
         grid = QtGui.QGridLayout()
 
@@ -33,7 +56,7 @@ class Gui(QtGui.QMainWindow):
         self.gh_url_text_box = QtGui.QLineEdit()
         gh_button = QtGui.QPushButton("Ok")
         gh_button.setEnabled(False)
-        yoshi_grid.addWidget(gh_button, 1, 2)
+        yoshi_grid.addWidget(gh_button, 1, 1)
         yoshi_grid.addWidget(self.gh_url_text_box, 0, 1)
         yoshi_box.setLayout(yoshi_grid)
 
@@ -60,23 +83,29 @@ class Gui(QtGui.QMainWindow):
         button_file.clicked.connect(self.ok_file_button_clicked)
         self.setCentralWidget(central_widget)
 
+    def back_button_clicked(self):
+        self._central_widget_layout_main()
+
     def browse_button_clicked(self):
         file_browser = QtGui.QFileDialog(self, "Open Yoshi JSON output file.", None, "JSON files (*.json *.txt)")
         file_browser.show()
         if file_browser.exec():
             self.file_path.setText(file_browser.selectedFiles()[0])
 
+    def report_button_clicked(self):
+        file_directory = os.path.join(os.path.abspath('.'), 'YoshiViz', 'input.txt')
+        report_generator.\
+            generate_pdf_report(file_directory, self.name, self.result)
+        dialog = QtGui.QMessageBox(self)
+        dialog.setText("The type of " + self.name + " is " + self.result +
+            ". Check ./yoshiviz/output for more informations.")
+        dialog.exec()
+
     def ok_file_button_clicked(self):
         try:
             temp_community_type = decision_tree_algorithm.\
                 community_type(self.file_path.text(), self.repositoryName.text())
-            file_directory = os.path.join(os.path.abspath('.'), 'YoshiViz', 'input.txt')
-            report_generator.\
-            generate_pdf_report(file_directory, self.repositoryName.text(), temp_community_type)
-            dialog = QtGui.QMessageBox(self)
-            dialog.setText("The type of " + self.repositoryName.text() + " is " + temp_community_type +
-                ". Check ./yoshiviz/output for more informations.")
-            dialog.exec()
+            self._central_widget_layout_results(self.repositoryName.text(), temp_community_type)
         except:
             error = QtGui.QMessageBox(self)
             error.setText("Unable to find community " + self.repositoryName.text() + " in " +
