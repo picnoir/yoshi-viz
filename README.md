@@ -2,7 +2,7 @@
 
 ##Quick start
 
-This software requires python >= 3.3. The software will generate a report file in the YoshiViz/output directory.
+This software requires python >= 3.4. The software will generate a report file in the YoshiViz/output directory.
 "Yoshi Vis" is getting the output of ['Yoshi'](https://github.com/maelstromdat/YOSHI)
 
 ##Dependencies
