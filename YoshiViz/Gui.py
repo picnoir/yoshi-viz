@@ -40,10 +40,7 @@ class Gui(QtGui.QMainWindow):
         back_button = QtGui.QPushButton("Back to main screen")
         grid.addWidget(back_button, 2, 0)
         back_button.clicked.connect(self.back_button_clicked)
-
-
         self.setCentralWidget(central_widget)
-
 
     def _central_widget_layout_main(self):
         central_widget = QtGui.QWidget(self)

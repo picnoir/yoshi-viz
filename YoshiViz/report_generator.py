@@ -18,11 +18,12 @@ def generate_pdf_report(yoshi_output_file, project_name, community_type):
                                       'YoshiViz', 'output', 'template.jinja'), 'r')
     template = Template(template_file.read())
     template_file.close()
-    img_link = _find_img_link(community_type)
+    img_link, description_text = _find_img_link(community_type)
     output = template.render(DataQuality=json_data['DataQuality'][community_index],
                              DataCommunity=json_data['DataCommunity'][community_index],
                              community_type=community_type,
-                             img_links=img_link)
+                             img_links=img_link,
+                             description_text=description_text)
     output_file = open(os.path.join(os.path.abspath('.'), 'YoshiViz', 'output',
                                     project_name + '_report.html'), 'w')
     output_file.write(output)
@@ -63,14 +64,35 @@ def _find_img_link(community_type):
 
     community_list = community_type.split(', ')
     link_list = []
+    description_text = ''
     if 'Community of Practice' in community_list:
+        description_text += "<h4>Community of Practice:</h4>"
+        with open(os.path.join(os.path.abspath('.'),
+                    'YoshiViz', 'Community description', 'CoP.txt'), 'r') as f:
+            description_text += "<p>" + f.read() + "</p>"
         link_list.append('Cop.jpg')
     if 'Informal Network' in community_list:
+        description_text += "<h4>Informal Network:</h4>"
+        with open(os.path.join(os.path.abspath('.'),
+                    'YoshiViz', 'Community description', 'IN.txt'), 'r') as f:
+            description_text += "<p>" + f.read() + "</p>"
         link_list.append('Informal_Network.jpg')
     if 'Informal Community' in community_list:
+        description_text += "<h4>Informal community:</h4>"
+        with open(os.path.join(os.path.abspath('.'),
+                    'YoshiViz', 'Community description', 'IC.txt'), 'r') as f:
+            description_text += "<p>" + f.read() + "</p>"
         link_list.append('Informal_community.jpg')
     if 'Network of Practice' in community_list:
+        description_text += "<h4>Network of Practice:</h4>"
+        with open(os.path.join(os.path.abspath('.'),
+                    'YoshiViz', 'Community description', 'NoP.txt'), 'r') as f:
+            description_text += "<p>" + f.read() + "</p>"
         link_list.append('Nop.jpg')
     if 'Formal Network' in community_list:
+        description_text += "<h4>Formal Network:</h4>"
+        with open(os.path.join(os.path.abspath('.'),
+                    'YoshiViz', 'Community description', 'FN.txt'), 'r') as f:
+            description_text += "<p>" + f.read() + "</p>"
         link_list.append('Formal.jpg')
-    return link_list
+    return link_list, description_text
