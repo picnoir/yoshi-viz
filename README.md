@@ -7,11 +7,36 @@ This software requires python >= 3.4. The software will generate a report file i
 
 ##Dependencies
 
+###Unix like systems
 Run pip to install the dependencies (Jinja2 and PyQt4):
 
 	% python3 setup.py install
 
 [PyQT4 for Win/Mac/Unix](http://www.riverbankcomputing.com/software/pyqt/download)
+
+###Windows systems
+####1: Python
+Download the latest python3.x distribution here: https://www.python.org/downloads/
+
+####2: External libraries
+
+In order to run yoshi-viz, you need to install two dependencies: Jinja2 and PyQt.
+
+#####Jinja2
+
+Jinja2 is available in the pypi repository. In order to download and install it, you should first open the windows command prompt: http://www.computerhope.com/issues/chdos.htm
+
+You should then type in this prompt:
+
+C:\Python34\Scripts\pip3.exe install jinja2
+
+#####PyQt
+
+Download the latest binary distribution here (Binary Packages) section:
+
+	http://www.riverbankcomputing.com/software/pyqt/download
+
+Take care of your python version (32 or 64 bit), if you have any doubt, just open a python interpreter, your python version should appear on the header.
 
 ##Usage
 ###Run __main__.py
