@@ -28,13 +28,11 @@ Jinja2 is available in the pypi repository. In order to download and install it,
 
 You should then type in this prompt:
 
-C:\Python34\Scripts\pip3.exe install jinja2
+	C:\Python34\Scripts\pip3.exe install jinja2
 
 #####PyQt
 
-Download the latest binary distribution here (Binary Packages) section:
-
-	http://www.riverbankcomputing.com/software/pyqt/download
+Download the latest binary distribution here (Binary Packages) section: http://www.riverbankcomputing.com/software/pyqt/download
 
 Take care of your python version (32 or 64 bit), if you have any doubt, just open a python interpreter, your python version should appear on the header.
 
